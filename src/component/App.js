@@ -1,29 +1,26 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import DieuHuongURL from "../routers/DieuHuongURL";
+import React, { Component } from "react";
 
 import "./../css/App.css";
-// import Contact from "./Contact";
-import Footer from "./Footer";
-// import Home from "./Home";
+import Databinding from "./Databinding";
+import HandleEvent from "./HandleEvent";
 
-// import Home from "./Home";
+class App extends Component {
+  state = {
+    isLogin: true,
+  };
+  getInfo = (formValue) => {
+    const { name, password } = formValue;
+    if (name && password) this.setState({ isLogin: false });
+  };
 
-import Nav from "./Nav";
-// import News from "./News";
-// import NewsDetail from "./NewsDetail";
-
-function App() {
-  return (
-    <Router>
-      <div>
-        <Nav />
-        <DieuHuongURL />
-
-        <Footer />
+  render() {
+    return (
+      <div className="container">
+        <HandleEvent getInfo={this.getInfo} />
+        <Databinding isLogin={this.state.isLogin} />
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
 export default App;
